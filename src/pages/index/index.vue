@@ -97,7 +97,6 @@
             async getFloorData() {
                 const {data: res} = await getFloorData()
                 this.foolrData = res.message
-                console.log(this.foolrData)
             }
 		}
 	}

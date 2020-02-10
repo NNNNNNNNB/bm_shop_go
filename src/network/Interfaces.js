@@ -27,3 +27,12 @@ export async function getFloorData() {
     return success
 }
 
+//获取商品分类数据
+export async function getCategoryData() {
+    let [err,success] = await uni.request({
+        url: baseUrl + "/categories",
+        method: "GET"
+    })
+    return success
+}
+
