@@ -27,7 +27,10 @@
                     </view>
 
                     <view class="goods-list">
-                        <navigator v-for="(goods,index) in item.children" :key="index">
+                        <navigator
+                            v-for="(goods,index) in item.children"
+                            :key="index"
+                            :url="`/pages/goods_list/goods_list?cat_id=${goods.cat_id}`">
                             <image :src="goods.cat_icon" mode="widthFix"/>
                             <view>{{goods.cat_name}}</view>
                         </navigator>
@@ -75,6 +78,7 @@
                 const {data: res} = await getCategoryData()
                 this.leftMenuList = res.message
                 this.rightGoodsList = this.leftMenuList[this.currentIndex].children
+                // console.log(this.rightGoodsList)
             },
             //分类选项被点击
             categoryClick(index) {

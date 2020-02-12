@@ -36,3 +36,13 @@ export async function getCategoryData() {
     return success
 }
 
+//获取商品搜索数据
+export async function getGoodsSearchData(option = {}) {
+    let [err,success] = await uni.request({
+        url: baseUrl + "/goods/search" + `?query=${option.query}&cid=${option.cid}&pagenum=${option.pagenum}&pagesize=${option.pagesize}`,
+        method: "GET",
+        timeout: 5000
+    })
+    return success
+}
+
