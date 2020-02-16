@@ -46,3 +46,12 @@ export async function getGoodsSearchData(option = {}) {
     return success
 }
 
+//获取商品详细数据
+export async function getGoodsDetailData(goodsId) {
+    let [err,success] = await uni.request({
+        url: baseUrl + "/goods/detail" + `?goods_id=${goodsId}`,
+        method: "GET"
+    })
+    return success
+}
+

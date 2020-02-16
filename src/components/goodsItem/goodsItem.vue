@@ -5,8 +5,8 @@
         </view>
 
         <view class="goods-describe">
-            <view class="goods-name">{{this.goodsName}}</view>
-            <view class="goods-price">￥{{this.goodsPrice}}</view>
+            <view class="goods-name">{{goodsName}}</view>
+            <view class="goods-price">￥{{goodsPrice}}</view>
         </view>
     </view>
 </template>
@@ -22,6 +22,9 @@
                 type: String
             },
             goodsPrice: {
+                type: Number
+            },
+            goodsId: {
                 type: Number
             }
         }

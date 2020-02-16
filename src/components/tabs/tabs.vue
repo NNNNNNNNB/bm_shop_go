@@ -2,17 +2,17 @@
     <!-- 将父组件传入的数据定义为css变量，方便使用到<style>中，由于高只能使用px单位，所以还是需要到内联样式中使用 -->
     <view class="tabs"
           :style="{
-                '--tabsHeight': tabsHeight,
-                '--fontColor': fontColor,
-                '--bgColor': bgColor,
-                '--activeFontColor': activeFontColor,
-                '--activeBgColor': activeBgColor,
-                '--activeBorderColor': activeBorderColor}">
+                '--tabs-height': tabsHeight,
+                '--font-color': fontColor,
+                '--bg-color': bgColor,
+                '--active-font-color': activeFontColor,
+                '--active-bg-color': activeBgColor,
+                '--active-border-color': activeBorderColor}">
 
         <view class="tabs-title">
             <view
-                :style="{'height': tabsHeight,'lineHeight': tabsHeight}"
                 :class="['title-item',activeIndex == index ? 'active-bg-color' : '']"
+                :style="{'height': 'var(--tabs-height)','lineHeight': 'var(--tabs-height)'}"
                 v-for="(item,index) in tabsTitle"
                 :key="index"
                 @click="tabsItemClick(index)">
@@ -39,7 +39,7 @@
             //item标题高度
             tabsHeight: {
                 type: String,
-                default: "60upx"
+                default: "30px"
             },
             //字体颜色
             fontColor: {
@@ -81,7 +81,7 @@
 
 <style scoped lang="less">
     .tabs-title {
-        background-color: var(--bgColor);
+        background-color: var(--bg-color);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -95,19 +95,19 @@
                 display: inline-block;
                 padding: 0 40upx;
                 height: 100%;
-                color: var(--fontColor);
+                color: var(--font-color);
             }
         }
     }
 
     /*被选中改变item背景色*/
     .active-bg-color {
-        background-color: var(--activeBgColor);
+        background-color: var(--active-bg-color);
     }
 
     /*被选中改变文字颜色和增加下边框*/
     .active {
-        color: var(--activeFontColor) !important;
-        border-bottom: 3px solid var(--activeBorderColor);
+        color: var(--active-font-color) !important;
+        border-bottom: 3px solid var(--active-border-color);
     }
 </style>

@@ -4,7 +4,7 @@
         <tabs
             @currentIndex="tabsItemClick"
             :tabs-title="tabsTitle"
-            tabs-height="80upx"
+            tabs-height="40px"
             font-color="#000"
             bg-color="#fff"
             active-font-color="#eb4450"
@@ -16,6 +16,7 @@
             <goods-item
                 v-for="(item,index) in goodsList"
                 :key="index"
+                @click.native="gotoGoodsDetail(item.goods_id)"
                 :goods-name="item.goods_name"
                 :goods-image="item.goods_big_logo"
                 :goods-price="item.goods_price"/>
@@ -27,6 +28,7 @@
             <goods-item
                 v-for="(item,index) in goodsList"
                 :key="index"
+                @click.native="gotoGoodsDetail(item.goods_id)"
                 :goods-name="item.goods_name"
                 :goods-image="item.goods_big_logo"
                 :goods-price="item.goods_price"/>
@@ -38,6 +40,7 @@
             <goods-item
                 v-for="(item,index) in goodsList"
                 :key="index"
+                @click.native="gotoGoodsDetail(item.goods_id)"
                 :goods-name="item.goods_name"
                 :goods-image="item.goods_big_logo"
                 :goods-price="item.goods_price"/>
@@ -119,6 +122,12 @@
                 this.goodsList.push(...res.message.goods)
                 this.total = res.message.total
                 uni.hideLoading()
+            },
+            //跳转商品详情
+            gotoGoodsDetail(goodsId) {
+                uni.navigateTo({
+                    url: `/pages/goods_detail/goods_detail?goods_id=${goodsId}`
+                })
             }
         }
     }
