@@ -31,7 +31,7 @@
         {
             "path": "pages/cart/cart",
             "style": {
-                "navigationBarTitleText": "购物⻋⻚⾯"
+                "navigationBarTitleText": "购物⻋"
             }
         },
         {
@@ -81,43 +81,59 @@
             "style": {
                 "navigationBarTitleText": "结算⻚⾯"
             }
+        },
+        {
+            "path": "pages/selectAddress/selectAddress",
+            "style": {
+                "navigationBarTitleText": "收货地址"
+            }
+        },
+        {
+            "path": "pages/editAddress/editAddress",
+            "style": {
+                "navigationBarTitleText": "编辑地址"
+            }
         }
     ],
     "globalStyle": {
         "navigationBarBackgroundColor": "#eb4450",
         "navigationBarTextStyle": "white",
         "navigationBarTitleText": "bm商城",
-        "backgroundColor": "light"
+        "backgroundColor": "#fff"
     },
     "tabBar": {
-        "color": "",
-        "selectedColor": "red",
-        "backgroundColor": "#ffffff",
+        "color": "#000",
+        "selectedColor": "#FFAABB",
         "borderStyle": "black",
+        "backgroundColor": "#ffffff",
         "list": [
             {
                 "pagePath": "pages/index/index",
+                "text": "首页",
                 "iconPath": "/static/img/tabBar/home.png",
-                "selectedIconPath": "/static/img/tabBar/home-o.png",
-                "text": "首页"
+                "selectedIconPath": "/static/img/tabBar/home-o.png"
+
             },
             {
                 "pagePath": "pages/category/category",
+                "text": "分类",
                 "iconPath": "/static/img/tabBar/category.png",
-                "selectedIconPath": "/static/img/tabBar/category-o.png",
-                "text": "分类"
+                "selectedIconPath": "/static/img/tabBar/category-o.png"
+
             },
             {
                 "pagePath": "pages/cart/cart",
+                "text": "购物车",
                 "iconPath": "/static/img/tabBar/cart.png",
-                "selectedIconPath": "/static/img/tabBar/cart-o.png",
-                "text": "购物车"
+                "selectedIconPath": "/static/img/tabBar/cart-o.png"
+
             },
             {
                 "pagePath": "pages/user/user",
+                "text": "我的",
                 "iconPath": "/static/img/tabBar/my.png",
-                "selectedIconPath": "/static/img/tabBar/my-o.png",
-                "text": "我的"
+                "selectedIconPath": "/static/img/tabBar/my-o.png"
+
             }
         ]
     }
