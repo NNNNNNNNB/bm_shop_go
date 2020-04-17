@@ -89,11 +89,10 @@
         .title-item {
             flex: 1;
             text-align: center;
-            font-size: 30upx;
+            font-size: 30rpx;
 
             .title-text {
                 display: inline-block;
-                padding: 0 40upx;
                 height: 100%;
                 color: var(--font-color);
             }
@@ -103,11 +102,11 @@
     /*被选中改变item背景色*/
     .active-bg-color {
         background-color: var(--active-bg-color);
+        border-bottom: 3px solid var(--active-border-color);
     }
 
     /*被选中改变文字颜色和增加下边框*/
     .active {
         color: var(--active-font-color) !important;
-        border-bottom: 3px solid var(--active-border-color);
     }
 </style>

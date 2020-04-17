@@ -1,5 +1,5 @@
 <template>
-    <view>
+    <view class="user">
         个⼈中⼼⻚⾯
     </view>
 </template>
@@ -10,6 +10,6 @@
     }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
 </style>

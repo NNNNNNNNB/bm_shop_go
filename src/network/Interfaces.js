@@ -106,3 +106,25 @@ export async function getPayParam(token,orderNumber) {
     return success
 }
 
+//获取历史订单查询，使用Promise方式封装
+export function getHistoryOrder(token,type) {
+    return new Promise((resolve,reject) => {
+        uni.request({
+            url: baseUrl + "/my/orders/all",
+            method: "GET",
+            header: {
+                Authorization: token
+            },
+            data: {
+                type: type
+            },
+            success: result => {
+                resolve(result.data.message)
+            },
+            fail: err => {
+                reject(err)
+            }
+        })
+    })
+}
+

@@ -159,7 +159,6 @@
                 //付款
                 let {data: payParamRes} = await getPayParam(token,order_number)
                 let pay = payParamRes.message.pay
-                console.log(pay)
                 uni.requestPayment({
                     // timeStamp: pay.timeStamp,
                     // nonceStr: pay.nonceStr,
