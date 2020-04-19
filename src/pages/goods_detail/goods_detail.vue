@@ -16,9 +16,9 @@
         <view class="goods-price">￥{{goodsDetailData.goods_price}}</view>
         <view class="goods-describe">
             <view class="goods-title">{{goodsDetailData.goods_name}}</view>
-            <view class="goods-collection">
-                <view class="font-icon iconfont icon-shoucang"></view>
-                <view class="collection">收藏</view>
+            <view class="goods-collection" @click="goodsCollection">
+                <view :class="['font-icon','iconfont',isCollection ? 'icon-shoucang1': 'icon-shoucang']"></view>
+                <view class="collection-text">收藏</view>
             </view>
         </view>
         <!-- 商品价格、名称、收藏 end -->
@@ -66,11 +66,26 @@
         data() {
             return {
                 //商品详情详细
-                goodsDetailData: {}
+                goodsDetailData: {},
+
+                //商品收藏数组
+                goodsCollectionArr: [],
+
+                //当前商品是否被收藏
+                isCollection: false
             }
         },
-        onLoad(params) {
-            this.getGoodsDetailData(params.goods_id)
+        async onLoad(params) {
+            //获取商品详情和商品收藏数组
+            await this.getGoodsDetailData(params.goods_id)
+            this.goodsCollectionArr = uni.getStorageSync("collection")
+            if (!Array.isArray(this.goodsCollectionArr)) {
+                this.goodsCollectionArr = []
+            }else {
+                let goodsIndex = this.goodsCollectionArr.findIndex(v => v.goods_id === this.goodsDetailData.goods_id)
+                this.isCollection = goodsIndex !== -1 ? true : false
+            }
+
         },
         methods: {
             //获取商品详情数据
@@ -94,6 +109,29 @@
                     current: index,
                     urls: images
                 })
+            },
+            //商品收藏按钮
+            goodsCollection() {
+                //获取当前商品收藏的数组索引，索引为-1则收藏商品，否则为取消收藏
+                let goodsIndex = this.goodsCollectionArr.findIndex(v => v.goods_id === this.goodsDetailData.goods_id)
+                if(goodsIndex === -1) {
+                    this.goodsCollectionArr.push(this.goodsDetailData)
+                    this.isCollection = true
+                    uni.showToast({
+                        title: "商品收藏成功",
+                        icon: "success",
+                        mask: false
+                    })
+                }else {
+                    this.goodsCollectionArr.splice(goodsIndex,1)
+                    this.isCollection = false
+                    uni.showToast({
+                        title: "取消收藏",
+                        icon: "success",
+                        mask: false
+                    })
+                }
+                uni.setStorageSync("collection",this.goodsCollectionArr)
             },
             //H5端显示
             //#ifdef H5
@@ -191,10 +229,14 @@
             align-items: center;
             border-left: 1px solid #000;
 
-            .collection {
+            .collection-text {
                 color: #434343;
             }
         }
+    }
+
+    .icon-shoucang1 {
+        color: red;
     }
     /*商品价格、名称、收藏 end*/
 

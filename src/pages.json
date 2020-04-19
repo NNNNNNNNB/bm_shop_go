@@ -37,7 +37,7 @@
         {
             "path": "pages/collect/collect",
             "style": {
-                "navigationBarTitleText": "收藏⻚⾯"
+                "navigationBarTitleText": "收藏"
             }
         },
         {
@@ -55,7 +55,7 @@
         {
             "path": "pages/user/user",
             "style": {
-                "navigationBarTitleText": "个⼈中⼼⻚⾯"
+                "navigationBarTitleText": "我的"
             }
         },
         {
