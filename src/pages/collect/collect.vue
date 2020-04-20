@@ -1,6 +1,13 @@
 <template>
     <view class="collect">
-        <tabs @currentIndex="getTabsIndex" :tabs-title="tabsItem" tabs-height="40px" font-color="#666" active-font-color="red" active-border-color="red"/>
+        <tabs
+            @currentIndex="getTabsIndex"
+            :tabs-title="tabsItem"
+            tabs-height="40px"
+            font-color="#666"
+            active-font-color="red"
+            active-border-color="red"
+            :active-index="activeIndex"/>
 
         <view class="comprehensive" v-if="currentTabsIndex === 0">
             <goods-item
@@ -28,8 +35,18 @@
             return {
                 tabsItem: ['商品收藏','品牌收藏','店铺收藏','浏览足迹'],
                 collectArr: [],
-                currentTabsIndex: 0
+                currentTabsIndex: 0,
+
+                //tabs默认选中的项
+                activeIndex: 0
             }
+        },
+        onLoad(param) {
+            if (param.tabsIndex) {
+                this.activeIndex = param.tabsIndex
+                this.currentTabsIndex = param.tabsIndex
+            }
+
         },
         onShow() {
             this.collectArr = uni.getStorageSync("collection")

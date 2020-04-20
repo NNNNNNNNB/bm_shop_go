@@ -63,6 +63,7 @@
 
 <script>
     import {createOrder,getPayParam} from "@/network/Interfaces";
+    import {token} from "@/token/token";
 
     export default {
         name: "pay",
@@ -133,8 +134,6 @@
                     })
                     return
                 }
-
-                let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIzLCJpYXQiOjE1NjQ3MzAwNzksImV4cCI6MTAwMTU2NDczMDA3OH0.YPt-XeLnjV-_1ITaXGY2FhxmCe4NvXuRnRB8OMCfnPo"
 
                 //将用户信息和token存入缓存
                 uni.setStorageSync("userInfo",userInfo)

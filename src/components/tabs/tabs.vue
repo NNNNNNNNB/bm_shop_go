@@ -11,12 +11,12 @@
 
         <view class="tabs-title">
             <view
-                :class="['title-item',activeIndex == index ? 'active-bg-color' : '']"
+                :class="['title-item',defActiveIndex == index ? 'active-bg-color' : '']"
                 :style="{'height': 'var(--tabs-height)','lineHeight': 'var(--tabs-height)'}"
                 v-for="(item,index) in tabsTitle"
                 :key="index"
                 @click="tabsItemClick(index)">
-                <text :class="['title-text',activeIndex == index ? 'active' : '']">{{item}}</text>
+                <text :class="['title-text',defActiveIndex == index ? 'active' : '']">{{item}}</text>
             </view>
         </view>
     </view>
@@ -27,10 +27,16 @@
         name: "tabs",
         data() {
             return {
-                activeIndex: 0
+                defActiveIndex: 0
             }
         },
         props: {
+            //指定选中的所有
+            activeIndex: {
+                type: Number,
+                default: 0
+            },
+
             //item标题文字
             tabsTitle: {
                 type: Array,
@@ -67,10 +73,13 @@
                 default: "#000"
             }
         },
+        mounted() {
+            this.defActiveIndex = this.activeIndex
+        },
         methods: {
             //tabs某个选项被点击
             tabsItemClick(index) {
-                this.activeIndex = index
+                this.defActiveIndex = index
 
                 //返回当前选中的索引
                 this.$emit("currentIndex",index)

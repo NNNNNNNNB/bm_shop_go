@@ -4,7 +4,9 @@
             :tabs-title="tabsTitle"
             tabs-height="40px"
             font-color="#666"
-            active-border-color="red" @currentIndex="getTabsIndex"/>
+            active-border-color="red"
+            :active-index="activeIndex"
+            @currentIndex="getTabsIndex"/>
 
         <!-- 订单查询项 start -->
         <view class="order-select"
@@ -43,7 +45,9 @@
         data() {
             return {
                 //tabs选项标题
-                tabsTitle: ["全部","待付款","代发货","退款/退货"],
+                tabsTitle: ["全部","待付款","待发货","退款/退货"],
+                //第一次打开默认选中的tabs项
+                activeIndex: 0,
 
                 //订单item
                 orderItem: [],
@@ -52,17 +56,16 @@
                 allOrder: [],
                 pendingPayOrder: [],
                 pendingShipmentOrder: [],
-                returnOrder: [],
-
-                //记录tabs选中项
-                recordTabsIndex: 1
+                returnOrder: []
             }
         },
-        async onLoad() {
+        async onLoad(param) {
+            this.activeIndex = Number(param.tabsIndex)
+
             let token = uni.getStorageSync("token")
 
             var {orders} = await getHistoryOrder(token,1)
-            this.orderItem = this.allOrder = orders
+            this.allOrder = orders
 
             var {orders} = await getHistoryOrder(token,2)
             this.pendingPayOrder = orders
@@ -70,32 +73,29 @@
             var {orders} = await getHistoryOrder(token,3)
             this.pendingShipmentOrder = orders
 
-
+            this.selectTabsIndex(this.activeIndex)
         },
         methods: {
-            //tabs被点击，获取当前index，将页面显示的订单item更改
-            getTabsIndex(index) {
-                if (this.recordTabsIndex !== index) {
-                    switch (index) {
-                        case 0: {
-                            this.orderItem = this.allOrder
-                            break
-                        }
-                        case 1: {
-                            this.orderItem = this.pendingPayOrder
-                            break
-                        }
-                        case 2: {
-                            this.orderItem = this.pendingShipmentOrder
-                            break
-                        }
-                        case 3: {
-                            this.orderItem = this.returnOrder
-                            break
-                        }
-                    }
-                    this.recordTabsIndex = index
+            //选中当前tabs显示的内容
+            selectTabsIndex(index) {
+                switch (index) {
+                    case 0:
+                        this.orderItem = this.allOrder
+                        break
+                    case 1:
+                        this.orderItem = this.pendingPayOrder
+                        break
+                    case 2:
+                        this.orderItem = this.pendingShipmentOrder
+                        break
+                    case 3:
+                        this.orderItem = this.returnOrder
+                        break
                 }
+            },
+            //获取并选中当前订单项
+            getTabsIndex(index) {
+                this.selectTabsIndex(index)
             }
         },
         filters: {
