@@ -128,3 +128,22 @@ export function getHistoryOrder(token,type) {
     })
 }
 
+//商品搜索
+export function getSearchData(query) {
+    return new Promise((resolve, reject) => {
+        uni.request({
+            url: baseUrl + "/goods/qsearch",
+            method: "GET",
+            data: {
+                query
+            },
+            success: result => {
+                resolve(result.data.message)
+            },
+            fail: err => {
+                reject(err)
+            }
+        })
+    })
+}
+

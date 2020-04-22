@@ -1,13 +1,15 @@
 //防抖处理函数
-export function debounce(func, delay) {
-    let timer = null
-    return function (...args) {
-        if (timer) clearTimeout(timer)
-        timer = setTimeout(() => {
-            func.apply(this,args)
-        },delay)
-    }
-}
+// data() {
+//     return {
+//         timer: null
+//     }
+// }
+// if (this.timer) {
+//     clearTimeout(this.timer)
+// }
+// this.timer = setTimeout(()=> {
+//     执行代码
+// },1000)
 
 
 /*
