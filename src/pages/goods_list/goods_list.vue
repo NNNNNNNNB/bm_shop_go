@@ -80,7 +80,8 @@
             }
         },
         onLoad(params) {
-            this.goodsSearchParams.cid = params.cat_id
+            this.goodsSearchParams.cid = params.cat_id || ""
+            this.goodsSearchParams.query = params.query || ""
             this.getGoodsSearchData(this.goodsSearchParams)
 
         },

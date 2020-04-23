@@ -8,7 +8,7 @@
         <!-- 轮播图 start -->
         <swiper circular indicator-dots autoplay class="swiper">
             <swiper-item v-for="(item,index) in swiperData" :key="item.goods_id" class="swiper-item">
-                <navigator>
+                <navigator :url="item.navigator_url">
                     <image :src="item.image_src" class="swiper-image" mode="widthFix"/>
                 </navigator>
             </swiper-item>
@@ -17,7 +17,8 @@
 
         <!-- 分类导航 start -->
         <view class="cate">
-            <navigator v-for="(item,index) in cateData" :key="index" class="cate-ator">
+            <navigator v-for="(item,index) in cateData" :key="index" class="cate-ator"
+                       url="/pages/category/category" open-type="switchTab">
                 <image :src="item.image_src" mode="widthFix" class="cate-image" />
             </navigator>
         </view>
@@ -34,12 +35,16 @@
                 <!-- 楼层排列图片 -->
                 <view class="foolr-item-list">
                     <view class="list-left">
-                        <navigator>
+                        <navigator :url="item.product_list[0].navigator_url">
                             <image :src="item.product_list[0].image_src" mode="widthFix" />
                         </navigator>
                     </view>
                     <view class="list-rigth">
-                        <navigator v-for="(listImage,index) in item.product_list" :key="index" v-if="index !== 0">
+                        <navigator
+                            v-for="(listImage,index) in item.product_list"
+                            :url="listImage.navigator_url"
+                            :key="index"
+                            v-if="index !== 0">
                             <image :src="listImage.image_src" mode="scaleToFill"/>
                         </navigator>
                     </view>
@@ -87,16 +92,30 @@
                     return
                 }
                 this.swiperData = res.message
+
+                //替换内部navigator链接地址
+                this.swiperData.forEach(v => {
+                    v.navigator_url = v.navigator_url.replace(/main/,"goods_detail")
+                })
             },
             //获取分类导航数据
             async getCateData() {
                 const {data: res} = await getCateData()
                 this.cateData = res.message
+
             },
             //获取楼层数据
             async getFloorData() {
                 const {data: res} = await getFloorData()
                 this.foolrData = res.message
+
+                //替换内部navigator链接地址
+                this.foolrData.forEach(v => {
+                    v.product_list.forEach(v => {
+                        let index = v.navigator_url.indexOf("?")
+                        v.navigator_url = v.navigator_url.slice(0,index) + '/goods_list'  + v.navigator_url.slice(index)
+                    })
+                })
             }
 		}
 	}

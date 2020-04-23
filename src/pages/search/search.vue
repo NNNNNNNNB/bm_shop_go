@@ -8,7 +8,7 @@
             <navigator
                 v-for="(item,index) in searchData"
                 :key="index"
-                url="/pages/goods_detail/goods_detail?goods_id={{item.goods_id}}">
+                :url="'/pages/goods_detail/goods_detail?goods_id=' + item.goods_id">
                 <view class="content-item">{{item.goods_name}}</view>
             </navigator>
         </view>
